@@ -20,15 +20,26 @@ export default class NumericInput extends Component {
     }
 
     // this.props refers to the new props
-    componentDidUpdate() {
-        const initSent = !(this.props.initValue !== 0 && !this.props.initValue); 
+    // componentDidUpdate() {
+    //     const initSent = !(this.props.initValue !== 0 && !this.props.initValue); 
+    //     console.log('value : '+this.state.value)
+    //     // compare the new value (props.initValue) with the existing/old one (this.state.value)
+    //     if (this.props.initValue !== this.state.value && initSent) {
+    //         this.setState({
+    //             value: this.props.initValue,
+    //             lastValid: this.props.initValue,
+    //             stringValue: this.props.initValue.toString()
+    //         });
+    //     }
+    // }
 
-        // compare the new value (props.initValue) with the existing/old one (this.state.value)
-        if (this.props.initValue !== this.state.value && initSent) {
+    // fix value not re-render
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.props.value) {
             this.setState({
-                value: this.props.initValue,
-                lastValid: this.props.initValue,
-                stringValue: this.props.initValue.toString()
+                value: this.props.value,
+                lastValid: this.props.value,
+                stringValue: this.props.value.toString()
             });
         }
     }
